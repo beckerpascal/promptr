@@ -1,93 +1,106 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace PromptrLib.Logic
 {
     public class PromptrClient : IPromptrClient
     {
-        private IConnectorClient connection;
+        // Private member for handling the connection for the whole lifetime
+        private IConnectorClient _connection;
 
-        private TimeSpan TotalDuration;
+        // Private members for timers and timespans
+        private TimeSpan _totalDuration;
+        private TimeSpan[] _slideDurations;
+        private Timer _timer;
+        private Timer _slideTimer;
 
-        private TimeSpan[] SlideDurations;
+        // Private members for handling bulbs and slides
+        private int _currentBulb;
+        private int _currentSlide;
 
-        private Timer timer;
-
-        private Timer slideTimer;
-
-        private int currentBulb;
-
-        private int currentSlide;
-
+        /*
+         * Constructor for creating a new PromptrClient with connection, timer and starting with bulb 0
+         */ 
         public PromptrClient()
         {
-            connection = new ConnectorClient();
-            timer = new Timer();
-            currentBulb = 0;
+            _connection = new ConnectorClient();
+            _timer = new Timer();
+            _currentBulb = 0;
         }
 
+        /*
+         * Ends count down
+         */ 
         public void EndCountdown()
         {
-            connection.TurnOff();
+            _connection.TurnOff();
         }
 
+        /*
+         * Sets the current slide number to a given number
+         * @param number: slide number
+         */ 
         public void SetCurrentSlideNumber(int number)
         {
-            //if (slideTimer != null)
+            //if (_slideTimer != null)
             //{
-            //    slideTimer.Stop();
+            //    _slideTimer.Stop();
             //}
 
-            //slideTimer = new Timer(SlideDurations[number - 1].TotalMilliseconds);
-            //slideTimer.AutoReset = false;
-            //slideTimer.Elapsed += (sender, args) =>
+            //_slideTimer = new Timer(_slideDurations[number - 1].TotalMilliseconds);
+            //_slideTimer.AutoReset = false;
+            //_slideTimer.Elapsed += (sender, args) =>
             //{
-            //    connection.Blink(1, currentBulb);
+            //   _connection.Blink(1, _currentBulb);
             //};
-            //slideTimer.Start();
+            //_slideTimer.Start();
         }
 
+        /*
+         * Starts the countdown with a total duration and/or a duration for each slide
+         * @param totalDuration: duration for the whole presentation
+         * @param slideDurations: duration array for each slide
+         */ 
         public void StartCountdown(TimeSpan totalDuration, TimeSpan[] slideDurations)
         {
-            TotalDuration = totalDuration;
-            SlideDurations = slideDurations;
-            currentBulb = 0;
+            _totalDuration = totalDuration;
+            _slideDurations = slideDurations;
+            _currentBulb = 0;
 
-            connection.TurnOn("#60854E");
+            _connection.TurnOn(Constants.COLOR_LIME);
 
-            timer = new Timer(TotalDuration.TotalMilliseconds / 3);
-            timer.AutoReset = true;
-            timer.Elapsed += (sender, args) =>
+            _timer = new Timer(_totalDuration.TotalMilliseconds / Constants.AMOUNT_OF_BULBS);
+            _timer.AutoReset = true;
+            _timer.Elapsed += (sender, args) =>
             {
                 FadeCurrentLight();
-                if (currentBulb > 3)
+                if (_currentBulb > Constants.AMOUNT_OF_BULBS)
                 {
-                    timer.Stop();
+                    _timer.Stop();
                 }
             };
 
             FadeCurrentLight();
 
-            timer.Start();
+            _timer.Start();
 
-            Timer endTimer = new Timer(TotalDuration.TotalMilliseconds - 30000);
+            Timer endTimer = new Timer(_totalDuration.TotalMilliseconds - 30000);
             endTimer.Elapsed += (sender, args) =>
             {
-                connection.Blink();
+                _connection.Blink();
                 
             };
             endTimer.Start();
 
         }
 
+        /*
+         * Fades the current light starting with the current bulb from start to end color in the specified time
+         */ 
         private void FadeCurrentLight()
         {
-            currentBulb++;
-            connection.Fade(new TimeSpan(0, 0, (int)TotalDuration.TotalSeconds / 3), "#60854E", "#FF0000", currentBulb);
+            _currentBulb++;
+            _connection.Fade(new TimeSpan(0, 0, (int)_totalDuration.TotalSeconds / Constants.AMOUNT_OF_BULBS), Constants.COLOR_LIME, Constants.COLOR_RED, _currentBulb);
             
         }
     }

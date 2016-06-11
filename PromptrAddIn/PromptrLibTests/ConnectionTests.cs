@@ -10,7 +10,7 @@ namespace PromptrLibTests
     [TestClass]
     public class ConnectionTests
     {
-        private readonly ConnectionFactory connFactory = new ConnectionFactory("x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8");
+        private readonly ConnectionFactory connFactory = new ConnectionFactory(Constants.APPKEY);
         private Connection _target;
 
         [TestInitialize]
@@ -25,7 +25,7 @@ namespace PromptrLibTests
         {
             for (int i = 0; i < 100; i++)
             {
-                await _target.Fade(i, "#00FF00", "#FF0000", 1);
+                await _target.Fade(i, Constants.COLOR_GREEN, Constants.COLOR_RED, 1);
                 Thread.Sleep(30);
             }
         }

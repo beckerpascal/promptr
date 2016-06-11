@@ -65,6 +65,7 @@
     <Compile Include="Connector\ColorCalculation.cs" />
     <Compile Include="Connector\Connection.cs" />
     <Compile Include="Connector\ConnectionFactory.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Logic\IConnectorClient.cs" />
     <Compile Include="Connector\ConnectorClient.cs" />
     <Compile Include="Logic\IPromptrClient.cs" />
