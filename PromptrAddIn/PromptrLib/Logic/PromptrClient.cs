@@ -77,10 +77,7 @@ namespace PromptrLib.Logic
             Timer endTimer = new Timer(TotalDuration.TotalMilliseconds - 30000);
             endTimer.Elapsed += (sender, args) =>
             {
-                for (int i = 1; i < 3; i++)
-                {
-                    connection.Blink(3, i);
-                }
+                connection.Blink();
                 
             };
             endTimer.Start();
