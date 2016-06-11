@@ -19,34 +19,22 @@ namespace PromptrLib
 
         public async void TurnOn()
         {
-            var command = new LightCommand();
-            command.TurnOn();
-
-            await connection.SendCommand(command);
+            await connection.TurnOn();
         }
 
         public async void TurnOn(int id)
         {
-            var command = new LightCommand();
-            command.TurnOn();
-
-            await connection.SendCommand(command, new List<string> { id.ToString() });
+            await connection.TurnOn(id);
         }
 
         public async void TurnOff()
         {
-            var command = new LightCommand();
-            command.TurnOff();
-
-            await connection.SendCommand(command);
+            await connection.TurnOff();
         }
 
         public async void TurnOff(int id)
         {
-            var command = new LightCommand();
-            command.TurnOff();
-
-            await connection.SendCommand(command, new List<string> { id.ToString() });
+            await connection.TurnOff(id);
         }
 
         public void Pulsate(int hertz, int id)
@@ -59,9 +47,9 @@ namespace PromptrLib
             throw new NotImplementedException();
         }
 
-        public void Fade(int percent, string color1, string color2)
+        public async void Fade(int percent, string startColor, string endColor, int id)
         {
-            throw new NotImplementedException();
+            await connection.Fade(percent, startColor, endColor, id);
         }
     }
 }
