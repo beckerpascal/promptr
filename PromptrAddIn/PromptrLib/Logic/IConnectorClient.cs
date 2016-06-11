@@ -15,5 +15,6 @@ namespace PromptrLib
         void Pulsate(int hertz, int id);
         void Blink(int repeatCount, int id);
         void Fade(int percent, string startColor, string endColor, int id);
+        void Fade(TimeSpan timeSpan, string startColor, string endColor, int id);
     }
 }

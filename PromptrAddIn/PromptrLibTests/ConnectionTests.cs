@@ -14,7 +14,7 @@ namespace PromptrLibTests
         private Connection target;
 
         [TestInitialize]
-        public async void TestInitialize()
+        public async void Initialize()
         {
             ConnectionFactory connFactory = new ConnectionFactory("x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8");
             target = connFactory.GetConnection();
@@ -32,9 +32,10 @@ namespace PromptrLibTests
         }
         
         [TestCleanup]
-        public async void Clean()
+        public async void Cleanup()
         {
             await target.TurnOff();
         }
+        
     }
 }

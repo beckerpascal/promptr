@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PromptrLib.Connector;
 using Q42.HueApi;
@@ -57,7 +58,16 @@ namespace PromptrLib
             await SendCommand(command, new List<string> {id.ToString()});
         }
 
+        public async Task Blink(int id)
+        {
+            var command = new LightCommand();
+            command.TurnOff();
+            command.SetColor("#FFFFFF");
 
+            await SendCommand(command, new List<string> { id.ToString() });
+
+
+        }
 
         private async Task SendCommand(LightCommand command, List<string> deviceList )
         {
@@ -67,6 +77,23 @@ namespace PromptrLib
         private async Task SendCommand(LightCommand command)
         {
             await client.SendCommandAsync(command);
+        }
+
+        public async Task Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
+        {
+            ColorCalculation colorCalc = new ColorCalculation();
+            var command = new LightCommand();
+
+            command.SetColor(startColor);
+
+            await SendCommand(command, new List<string> { id.ToString() });
+
+            command = new LightCommand();
+
+            command.SetColor(startColor);
+            command.TransitionTime = timeSpan;
+
+            await SendCommand(command, new List<string> { id.ToString() });
         }
     }
 }

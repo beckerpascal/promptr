@@ -51,5 +51,10 @@ namespace PromptrLib
         {
             await connection.Fade(percent, startColor, endColor, id);
         }
+
+        public async void Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
+        {
+            await connection.Fade(timeSpan, startColor, endColor, id);
+        }
     }
 }
