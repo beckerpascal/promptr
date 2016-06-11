@@ -23,10 +23,27 @@ namespace PromptrLib
 
             await SendCommand(command);
         }
+        public async Task TurnOn(string color)
+        {
+            var command = new LightCommand();
+            command.SetColor(color);
+            command.TurnOn();
+
+            await SendCommand(command);
+        }
 
         public async Task TurnOn(int id)
         {
             var command = new LightCommand();
+            command.TurnOn();
+
+            await SendCommand(command, new List<string> { id.ToString() });
+        }
+
+        public async Task TurnOn(string color, int id)
+        {
+            var command = new LightCommand();
+            command.SetColor(color);
             command.TurnOn();
 
             await SendCommand(command, new List<string> { id.ToString() });

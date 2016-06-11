@@ -9,7 +9,9 @@ namespace PromptrLib
     public interface IConnectorClient
     {
         void TurnOn();
+        void TurnOn(string color);
         void TurnOn(int id);
+        void TurnOn(string color, int id);
         void TurnOff();
         void TurnOff(int id);
         void Pulsate(int hertz, int id);
