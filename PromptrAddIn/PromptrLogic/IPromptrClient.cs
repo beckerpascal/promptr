@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace PromptrLogic
 {
-    public class Connection
+    public interface IPromptrClient
     {
-
+        void TurnOn();
+        void TurnOn(int id);
+        void TurnOff();
+        void TurnOff(int id);
     }
 }
