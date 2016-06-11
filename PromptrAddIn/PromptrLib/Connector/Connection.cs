@@ -111,6 +111,18 @@ namespace PromptrLib
             await client.SendCommandAsync(command);
         }
 
-        
+
+        public async Task Puls(int id)
+        {
+            var command = new LightCommand();
+            command.Brightness = 255;
+
+            await SendCommand(command, new List<string> { id.ToString() });
+
+            command = new LightCommand();
+            command.Brightness = 100;
+
+            await SendCommand(command, new List<string> { id.ToString() });
+        }
     }
 }

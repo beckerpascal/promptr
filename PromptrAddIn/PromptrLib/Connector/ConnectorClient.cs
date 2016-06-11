@@ -48,9 +48,9 @@ namespace PromptrLib
             await connection.TurnOff(id);
         }
 
-        public void Pulsate(int hertz, int id)
+        public async void Pulsate(int hertz, int id)
         {
-            throw new NotImplementedException();
+            await connection.Puls(id);
         }
 
         public async void Blink(int repeatCount, int id)

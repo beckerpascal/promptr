@@ -30,7 +30,13 @@ namespace PromptrLibTests
                 Thread.Sleep(30);
             }
         }
-        
+
+        [TestMethod]
+        public async Task Puls()
+        {
+            await target.Puls(1);
+        }
+
         [TestCleanup]
         public async void Cleanup()
         {
