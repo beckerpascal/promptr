@@ -98,7 +98,6 @@ namespace PromptrLib
 
         public async Task Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
         {
-            ColorCalculation colorCalc = new ColorCalculation();
             var command = new LightCommand();
 
             command.SetColor(startColor);
@@ -107,7 +106,7 @@ namespace PromptrLib
 
             command = new LightCommand();
 
-            command.SetColor(startColor);
+            command.SetColor(endColor);
             command.TransitionTime = timeSpan;
 
             await SendCommand(command, new List<string> { id.ToString() });
