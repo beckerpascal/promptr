@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PromptrLib;
@@ -13,27 +14,27 @@ namespace PromptrLibTests
         private Connection target;
 
         [TestInitialize]
-        public void TestInitialize()
+        public async void TestInitialize()
         {
             ConnectionFactory connFactory = new ConnectionFactory("x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8");
             target = connFactory.GetConnection();
+            await target.TurnOn();
         }
-
+        
         [TestMethod]
-        public async Task StartConnection()
+        public async Task Fade()
         {
-            var command = new LightCommand();
-            command.TurnOn();
-            command.SetColor("FFAA00");
-
-            await target.SendCommand(command);
-
-            Thread.Sleep(3000);
-
-            command = new LightCommand();
-            command.TurnOff();
-
-            await target.SendCommand(command);
+            for (int i = 0; i < 100; i++)
+            {
+                await target.Fade(i, "#00FF00", "#FF0000", 1);
+                Thread.Sleep(30);
+            }
+        }
+        
+        [TestCleanup]
+        public async void Clean()
+        {
+            await target.TurnOff();
         }
     }
 }
