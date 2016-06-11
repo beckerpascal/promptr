@@ -203,7 +203,7 @@
     <ManifestKeyFile>PromptrAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0F040FDF3AF73FAD8BC502C5F3516D1717045F4F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>62CD411E60DC940DFF3BA6FF1A9697512384830F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
