@@ -22,9 +22,20 @@ namespace PromptrLib
             await connection.TurnOn();
         }
 
+        public async void TurnOn(string color)
+        {
+            await connection.TurnOn(color);
+        }
+
+
         public async void TurnOn(int id)
         {
             await connection.TurnOn(id);
+        }
+
+        public async void TurnOn(string color, int id)
+        {
+            await connection.TurnOn(color, id);
         }
 
         public async void TurnOff()
