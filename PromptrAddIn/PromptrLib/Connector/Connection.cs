@@ -75,11 +75,26 @@ namespace PromptrLib
             await SendCommand(command, new List<string> {id.ToString()});
         }
 
+        public async Task Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
+        {
+            var command = new LightCommand();
+
+            command.SetColor(startColor);
+
+            await SendCommand(command, new List<string> { id.ToString() });
+
+            command = new LightCommand();
+
+            command.SetColor(endColor);
+            command.TransitionTime = timeSpan;
+
+            await SendCommand(command, new List<string> { id.ToString() });
+        }
+
         public async Task Blink(int id)
         {
             var command = new LightCommand();
-            command.TurnOff();
-            command.SetColor("#FFFFFF");
+            command.Alert = Alert.Once;
 
             await SendCommand(command, new List<string> { id.ToString() });
 
@@ -96,20 +111,6 @@ namespace PromptrLib
             await client.SendCommandAsync(command);
         }
 
-        public async Task Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
-        {
-            var command = new LightCommand();
-
-            command.SetColor(startColor);
-
-            await SendCommand(command, new List<string> { id.ToString() });
-
-            command = new LightCommand();
-
-            command.SetColor(endColor);
-            command.TransitionTime = timeSpan;
-
-            await SendCommand(command, new List<string> { id.ToString() });
-        }
+        
     }
 }

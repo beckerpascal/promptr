@@ -53,9 +53,12 @@ namespace PromptrLib
             throw new NotImplementedException();
         }
 
-        public void Blink(int repeatCount, int id)
+        public async void Blink(int repeatCount, int id)
         {
-            throw new NotImplementedException();
+            for (int blinkCount = 0; blinkCount < repeatCount; blinkCount++)
+            {
+                await connection.Blink(id);
+            }
         }
 
         public async void Fade(int percent, string startColor, string endColor, int id)
