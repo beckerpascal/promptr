@@ -12,6 +12,8 @@ namespace PromptrAddIn
         public TimeSpan TotalDuration { get; private set; }
         public TimeSpan[] SlideDurations { get; private set; }
 
+        private List<int> overwritten;
+
         private int currentSlideIndex;
 
         private void MyRibbon_Load(object sender, RibbonUIEventArgs e)
@@ -22,6 +24,8 @@ namespace PromptrAddIn
             {
                 UpdateSlideButtons();
             };
+
+            overwritten = new List<int>();
 
             TotalDurationDropDown.Items.Clear();
 
@@ -83,20 +87,29 @@ namespace PromptrAddIn
 
             SlideDurations = new TimeSpan[count];
 
+            int defaultSeconds = (int)(TotalDuration.TotalSeconds / count);
+
             for (int i = 0; i < oldDurations.Length; i++)
             {
                 if (i < count)
                 {
-                    SlideDurations[i] = oldDurations[i];
+                    if (overwritten.Contains(i))
+                    {
+                        SlideDurations[i] = oldDurations[i];
+                    } else
+                    {
+                        SlideDurations[i] = new TimeSpan(0, 0, defaultSeconds);
+                    }
+                    
                 }
             }
 
             if (oldDurations.Length < count)
             {
-                int seconds = (int)(TotalDuration.TotalSeconds / count);
+                
                 for (int i = oldDurations.Length; i < count; i++)
                 {
-                    SlideDurations[i] = new TimeSpan(0, 0, seconds);
+                    SlideDurations[i] = new TimeSpan(0, 0, defaultSeconds);
                 }
             }
         }
@@ -106,20 +119,32 @@ namespace PromptrAddIn
             int minutes = SlideDurations[currentSlideIndex].Minutes;
             int seconds = 0;
             Int32.TryParse(slideSecondsDropDown.SelectedItem.Label, out seconds);
-            SlideDurations[currentSlideIndex] = new TimeSpan(0, minutes, seconds);               
+            SlideDurations[currentSlideIndex] = new TimeSpan(0, minutes, seconds);  
+            
+            if (!overwritten.Contains(currentSlideIndex))
+            {
+                overwritten.Add(currentSlideIndex);
+            }             
         }
 
         private void slidesDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
             currentSlideIndex = slidesDropDown.SelectedItemIndex;
+            slideMinuteDropDown.SelectedItemIndex = SlideDurations[currentSlideIndex].Minutes;
+            slideSecondsDropDown.SelectedItemIndex = SlideDurations[currentSlideIndex].Seconds;
         }
 
         private void slideMinuteDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
             int seconds = SlideDurations[currentSlideIndex].Seconds;
             int minutes = 0;
-            Int32.TryParse(TotalDurationDropDown.SelectedItem.Label, out minutes);
-            TotalDuration = new TimeSpan(0, minutes, seconds);
+            Int32.TryParse(slideMinuteDropDown.SelectedItem.Label, out minutes);
+            SlideDurations[currentSlideIndex] = new TimeSpan(0, minutes, seconds);
+
+            if (!overwritten.Contains(currentSlideIndex))
+            {
+                overwritten.Add(currentSlideIndex);
+            }
         }
 
         private void TotalDurationDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
