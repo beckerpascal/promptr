@@ -181,6 +181,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Serializer.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -191,6 +192,12 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PromptrLib\PromptrLib.csproj">
+      <Project>{c2a37c88-1fb9-4c47-8685-c1d269b87ee7}</Project>
+      <Name>PromptrLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -203,7 +210,7 @@
     <ManifestKeyFile>PromptrAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>62CD411E60DC940DFF3BA6FF1A9697512384830F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0F040FDF3AF73FAD8BC502C5F3516D1717045F4F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

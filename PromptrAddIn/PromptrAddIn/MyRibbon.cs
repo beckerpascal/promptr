@@ -9,14 +9,50 @@ namespace PromptrAddIn
 {
     public partial class MyRibbon
     {
+        public TimeSpan TotalDuration { get; private set; }
+        public TimeSpan[] SlideDurations { get; private set; }
+
+        private int currentSlideIndex;
+
         private void MyRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             Globals.ThisAddIn.Application.AfterPresentationOpen += (args) => { UpdateSlideButtons(); };
             Globals.ThisAddIn.Application.PresentationNewSlide += Application_PresentationNewSlide;
-            button1.Click += (s, args) =>
+            refreshButton.Click += (s, args) =>
             {
                 UpdateSlideButtons();
             };
+
+            TotalDurationDropDown.Items.Clear();
+
+            for (int i = 0; i <= 60; i++)
+            {
+                var item = Factory.CreateRibbonDropDownItem();
+                item.Label = i + "";
+                TotalDurationDropDown.Items.Add(item);
+            }
+
+            slideMinuteDropDown.Items.Clear();
+
+            for (int i = 0; i <= 20; i++)
+            {
+                var item = Factory.CreateRibbonDropDownItem();
+                item.Label = i + "";
+                slideMinuteDropDown.Items.Add(item);
+            }
+
+            slideSecondsDropDown.Items.Clear();
+
+            for (int i = 0; i <= 60; i++)
+            {
+                var item = Factory.CreateRibbonDropDownItem();
+                item.Label = i + "";
+                slideSecondsDropDown.Items.Add(item);
+            }
+
+            TotalDuration = new TimeSpan(0, 3, 0);
+            SlideDurations = new TimeSpan[0];
+
 
         }
 
@@ -33,30 +69,64 @@ namespace PromptrAddIn
 
             int count = presentation.Slides.Count;
 
-            dropDown1.Items.Clear();
+            slidesDropDown.Items.Clear();
 
             for (int i = 0; i < count; i++)
             {
                 int number = i + 1;
                 var item = Factory.CreateRibbonDropDownItem();
                 item.Label = presentation.Slides[number].Name;
-                dropDown1.Items.Add(item);
+                slidesDropDown.Items.Add(item);
+            }
+
+            var oldDurations = SlideDurations;
+
+            SlideDurations = new TimeSpan[count];
+
+            for (int i = 0; i < oldDurations.Length; i++)
+            {
+                if (i < count)
+                {
+                    SlideDurations[i] = oldDurations[i];
+                }
+            }
+
+            if (oldDurations.Length < count)
+            {
+                int seconds = (int)(TotalDuration.TotalSeconds / count);
+                for (int i = oldDurations.Length; i < count; i++)
+                {
+                    SlideDurations[i] = new TimeSpan(0, 0, seconds);
+                }
             }
         }
 
-        private void editBox1_TextChanged(object sender, RibbonControlEventArgs e)
+        private void slideSecondsDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
-
+            int minutes = SlideDurations[currentSlideIndex].Minutes;
+            int seconds = 0;
+            Int32.TryParse(slideSecondsDropDown.SelectedItem.Label, out seconds);
+            SlideDurations[currentSlideIndex] = new TimeSpan(0, minutes, seconds);               
         }
 
-        private void editBox2_TextChanged(object sender, RibbonControlEventArgs e)
+        private void slidesDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
-            
+            currentSlideIndex = slidesDropDown.SelectedItemIndex;
         }
 
-        private void dropDown1_SelectionChanged(object sender, RibbonControlEventArgs e)
+        private void slideMinuteDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
+            int seconds = SlideDurations[currentSlideIndex].Seconds;
+            int minutes = 0;
+            Int32.TryParse(TotalDurationDropDown.SelectedItem.Label, out minutes);
+            TotalDuration = new TimeSpan(0, minutes, seconds);
+        }
 
+        private void TotalDurationDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
+        {
+            int minutes = 0;
+            Int32.TryParse(TotalDurationDropDown.SelectedItem.Label, out minutes);
+            TotalDuration = new TimeSpan(0, minutes, 0);
         }
     }
 }

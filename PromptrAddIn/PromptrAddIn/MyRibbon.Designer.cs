@@ -36,11 +36,12 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.Duration = this.Factory.CreateRibbonGroup();
-            this.editBox1 = this.Factory.CreateRibbonEditBox();
+            this.TotalDurationDropDown = this.Factory.CreateRibbonDropDown();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.dropDown1 = this.Factory.CreateRibbonDropDown();
-            this.editBox2 = this.Factory.CreateRibbonEditBox();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.slidesDropDown = this.Factory.CreateRibbonDropDown();
+            this.slideMinuteDropDown = this.Factory.CreateRibbonDropDown();
+            this.slideSecondsDropDown = this.Factory.CreateRibbonDropDown();
+            this.refreshButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.Duration.SuspendLayout();
             this.group1.SuspendLayout();
@@ -55,41 +56,47 @@
             // 
             // Duration
             // 
-            this.Duration.Items.Add(this.editBox1);
+            this.Duration.Items.Add(this.TotalDurationDropDown);
             this.Duration.Label = "Presentation Duration";
             this.Duration.Name = "Duration";
             // 
-            // editBox1
+            // TotalDurationDropDown
             // 
-            this.editBox1.Label = "Duration";
-            this.editBox1.Name = "editBox1";
-            this.editBox1.Text = null;
-            this.editBox1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.editBox1_TextChanged);
+            this.TotalDurationDropDown.Label = "Minutes";
+            this.TotalDurationDropDown.Name = "TotalDurationDropDown";
+            this.TotalDurationDropDown.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TotalDurationDropDown_SelectionChanged);
             // 
             // group1
             // 
-            this.group1.Items.Add(this.dropDown1);
-            this.group1.Items.Add(this.editBox2);
-            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.slidesDropDown);
+            this.group1.Items.Add(this.slideMinuteDropDown);
+            this.group1.Items.Add(this.slideSecondsDropDown);
+            this.group1.Items.Add(this.refreshButton);
             this.group1.Label = "Slide Durations";
             this.group1.Name = "group1";
             // 
-            // dropDown1
+            // slidesDropDown
             // 
-            this.dropDown1.Label = "Slide";
-            this.dropDown1.Name = "dropDown1";
-            this.dropDown1.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown1_SelectionChanged);
+            this.slidesDropDown.Label = "Slide";
+            this.slidesDropDown.Name = "slidesDropDown";
+            this.slidesDropDown.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.slidesDropDown_SelectionChanged);
             // 
-            // editBox2
+            // slideMinuteDropDown
             // 
-            this.editBox2.Label = "Duration";
-            this.editBox2.Name = "editBox2";
-            this.editBox2.Text = null;
+            this.slideMinuteDropDown.Label = "Minutes";
+            this.slideMinuteDropDown.Name = "slideMinuteDropDown";
+            this.slideMinuteDropDown.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.slideMinuteDropDown_SelectionChanged);
             // 
-            // button1
+            // slideSecondsDropDown
             // 
-            this.button1.Label = "Refresh";
-            this.button1.Name = "button1";
+            this.slideSecondsDropDown.Label = "Seconds";
+            this.slideSecondsDropDown.Name = "slideSecondsDropDown";
+            this.slideSecondsDropDown.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.slideSecondsDropDown_SelectionChanged);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Label = "Refresh";
+            this.refreshButton.Name = "refreshButton";
             // 
             // MyRibbon
             // 
@@ -111,11 +118,12 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Duration;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown slidesDropDown;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton refreshButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown slideMinuteDropDown;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown slideSecondsDropDown;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown TotalDurationDropDown;
     }
 
     partial class ThisRibbonCollection
