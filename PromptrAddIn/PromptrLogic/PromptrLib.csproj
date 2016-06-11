@@ -63,8 +63,8 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="ConnectionFactory.cs" />
-    <Compile Include="IPromptrClient.cs" />
-    <Compile Include="PromptrClient.cs" />
+    <Compile Include="IConnectorClient.cs" />
+    <Compile Include="ConnectorClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

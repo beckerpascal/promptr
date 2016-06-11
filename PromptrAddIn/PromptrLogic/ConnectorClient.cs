@@ -8,11 +8,11 @@ using Q42.HueApi;
 
 namespace PromptrLogic
 {
-    public class PromptrClient : IPromptrClient
+    public class ConnectorClient : IConnectorClient
     {
         private Connection connection;
 
-        public PromptrClient()
+        public ConnectorClient()
         {
             connection = new ConnectionFactory("x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8").GetConnection();
         }
@@ -49,5 +49,19 @@ namespace PromptrLogic
             await connection.SendCommand(command, new List<string> { id.ToString() });
         }
 
+        public void Pulsate(int hertz, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Blink(int repeatCount, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fade(int percent, string color1, string color2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
