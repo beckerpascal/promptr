@@ -63,6 +63,7 @@
             // 
             this.editBox1.Label = "Duration";
             this.editBox1.Name = "editBox1";
+            this.editBox1.Text = null;
             this.editBox1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.editBox1_TextChanged);
             // 
             // group1
@@ -83,6 +84,7 @@
             // 
             this.editBox2.Label = "Duration";
             this.editBox2.Name = "editBox2";
+            this.editBox2.Text = null;
             // 
             // button1
             // 
