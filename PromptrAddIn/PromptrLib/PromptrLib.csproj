@@ -67,6 +67,8 @@
     <Compile Include="Connector\ConnectionFactory.cs" />
     <Compile Include="Logic\IConnectorClient.cs" />
     <Compile Include="Connector\ConnectorClient.cs" />
+    <Compile Include="Logic\IPromptrClient.cs" />
+    <Compile Include="Logic\PromptrClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
