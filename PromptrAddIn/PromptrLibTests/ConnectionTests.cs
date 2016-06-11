@@ -32,9 +32,9 @@ namespace PromptrLibTests
         }
 
         [TestMethod]
-        public async Task Puls()
+        public async Task Blink()
         {
-            await target.Puls(1);
+            await target.Blink(1);
         }
 
         [TestCleanup]

@@ -48,17 +48,14 @@ namespace PromptrLib
             await connection.TurnOff(id);
         }
 
-        public async void Pulsate(int hertz, int id)
+        public async void Blink(int id)
         {
-            await connection.Puls(id);
+            await connection.Blink(id);
         }
 
-        public async void Blink(int repeatCount, int id)
+        public async void Blink()
         {
-            for (int blinkCount = 0; blinkCount < repeatCount; blinkCount++)
-            {
-                await connection.Blink(id);
-            }
+            await connection.Blink();
         }
 
         public async void Fade(int percent, string startColor, string endColor, int id)
