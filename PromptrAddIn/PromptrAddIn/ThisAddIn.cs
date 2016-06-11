@@ -15,7 +15,13 @@ namespace PromptrAddIn
         {
             MessageBox.Show("AddIn läuft");
             Globals.ThisAddIn.Application.SlideShowBegin += ShowActivePresentation;
+            Globals.ThisAddIn.Application.SlideShowNextSlide += Application_SlideShowNextSlide;
+            
+        }
 
+        private void Application_SlideShowNextSlide(PowerPoint.SlideShowWindow Wn)
+        {
+            //
         }
 
         private void ShowActivePresentation(PowerPoint.SlideShowWindow wn)
