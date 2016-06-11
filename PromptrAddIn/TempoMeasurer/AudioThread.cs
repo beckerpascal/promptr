@@ -71,7 +71,7 @@ namespace TempoMeasurer
 
         private void process(short[] buffer)
         {
-            Console.WriteLine(DateTime.UtcNow.Millisecond);
+            Console.WriteLine(DateTime.UtcNow.Ticks);
         }
     }
 }
