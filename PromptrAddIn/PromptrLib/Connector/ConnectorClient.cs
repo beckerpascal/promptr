@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using PromptrLib;
 using Q42.HueApi;
 
-namespace PromptrLogic
+namespace PromptrLib
 {
     public class ConnectorClient : IConnectorClient
     {
