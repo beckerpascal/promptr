@@ -17,14 +17,17 @@ namespace PromptrLib.Logic
 
         private Timer timer;
 
-        private int percentCounter;
+        private Timer slideTimer;
 
         private int currentBulb;
+
+        private int currentSlide;
 
         public PromptrClient()
         {
             connection = new ConnectorClient();
             timer = new Timer();
+            currentBulb = 0;
         }
 
         public void EndCountdown()
@@ -34,30 +37,50 @@ namespace PromptrLib.Logic
 
         public void SetCurrentSlideNumber(int number)
         {
-            connection.Blink(1, currentBulb);
+            if (slideTimer != null)
+            {
+                slideTimer.Stop();
+            }
+
+            slideTimer = new Timer(SlideDurations[number - 1].TotalMilliseconds);
+            slideTimer.AutoReset = false;
+            slideTimer.Elapsed += (sender, args) =>
+            {
+                connection.Blink(1, currentBulb);
+            };
+            slideTimer.Start();
         }
 
         public void StartCountdown(TimeSpan totalDuration, TimeSpan[] slideDurations)
         {
             TotalDuration = totalDuration;
             SlideDurations = slideDurations;
+            currentBulb = 0;
 
-            timer = new Timer(TotalDuration.TotalMilliseconds / 300);
+            connection.TurnOn("#60854E");
+
+            timer = new Timer(TotalDuration.TotalMilliseconds / 3);
             timer.AutoReset = true;
             timer.Elapsed += (sender, args) =>
             {
-                percentCounter++;
-                connection.Fade(percentCounter, "00FF00", "FF0000");
-
-                if (percentCounter == 100)
+                FadeCurrentLight();
+                if (currentBulb > 3)
                 {
-                    percentCounter = 0;
-                    currentBulb++;
+                    timer.Stop();
                 }
             };
+
+            FadeCurrentLight();
+
             timer.Start();
 
-            connection.Fade(100, "00FF00", "00FF00");
+        }
+
+        private void FadeCurrentLight()
+        {
+            currentBulb++;
+            connection.Fade(new TimeSpan(0, 0, (int)TotalDuration.TotalSeconds / 3), "#60854E", "#FF0000", currentBulb);
+            
         }
     }
 }

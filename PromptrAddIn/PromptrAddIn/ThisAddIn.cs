@@ -15,9 +15,16 @@ namespace PromptrAddIn
     {
 
         IPromptrClient client;
+        private bool started;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Globals.ThisAddIn.Application.SlideShowBegin += ShowActivePresentation;
+            Globals.ThisAddIn.Application.SlideShowEnd += (args) =>
+            {
+                started = false;
+                client.EndCountdown();
+            };
             Globals.ThisAddIn.Application.SlideShowNextSlide += Application_SlideShowNextSlide;
 
             client = new PromptrClient();
@@ -26,12 +33,13 @@ namespace PromptrAddIn
 
         private void Application_SlideShowNextSlide(PowerPoint.SlideShowWindow Wn)
         {
-            client.SetCurrentSlideNumber(Wn.Presentation.SlideShowWindow.View.CurrentShowPosition);
+            if (started) client.SetCurrentSlideNumber(Wn.Presentation.SlideShowWindow.View.CurrentShowPosition);
         }
 
         private void ShowActivePresentation(PowerPoint.SlideShowWindow wn)
         {
-            
+            started = true;
+
             var ribbon = Globals.Ribbons.GetRibbon<MyRibbon>();
             
             client.StartCountdown(ribbon.TotalDuration, ribbon.SlideDurations);
@@ -39,6 +47,7 @@ namespace PromptrAddIn
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+            started = false;
             client.EndCountdown();
         }
 
