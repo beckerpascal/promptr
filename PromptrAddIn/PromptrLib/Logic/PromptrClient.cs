@@ -37,18 +37,18 @@ namespace PromptrLib.Logic
 
         public void SetCurrentSlideNumber(int number)
         {
-            if (slideTimer != null)
-            {
-                slideTimer.Stop();
-            }
+            //if (slideTimer != null)
+            //{
+            //    slideTimer.Stop();
+            //}
 
-            slideTimer = new Timer(SlideDurations[number - 1].TotalMilliseconds);
-            slideTimer.AutoReset = false;
-            slideTimer.Elapsed += (sender, args) =>
-            {
-                connection.Blink(1, currentBulb);
-            };
-            slideTimer.Start();
+            //slideTimer = new Timer(SlideDurations[number - 1].TotalMilliseconds);
+            //slideTimer.AutoReset = false;
+            //slideTimer.Elapsed += (sender, args) =>
+            //{
+            //    connection.Blink(1, currentBulb);
+            //};
+            //slideTimer.Start();
         }
 
         public void StartCountdown(TimeSpan totalDuration, TimeSpan[] slideDurations)
@@ -73,6 +73,17 @@ namespace PromptrLib.Logic
             FadeCurrentLight();
 
             timer.Start();
+
+            Timer endTimer = new Timer(TotalDuration.TotalMilliseconds - 30000);
+            endTimer.Elapsed += (sender, args) =>
+            {
+                for (int i = 1; i < 3; i++)
+                {
+                    connection.Blink(3, i);
+                }
+                
+            };
+            endTimer.Start();
 
         }
 

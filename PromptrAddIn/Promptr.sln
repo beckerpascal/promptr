@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptrLibTests", "PromptrL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptrLib", "PromptrLib\PromptrLib.csproj", "{C2A37C88-1FB9-4C47-8685-C1D269B87EE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoMeasurer", "TempoMeasurer\TempoMeasurer.csproj", "{979C7DE0-6901-4AD7-B200-4D0E600B76AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CI|Any CPU = CI|Any CPU
@@ -34,6 +36,15 @@ Global
 		{C2A37C88-1FB9-4C47-8685-C1D269B87EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2A37C88-1FB9-4C47-8685-C1D269B87EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2A37C88-1FB9-4C47-8685-C1D269B87EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.CI|Any CPU.ActiveCfg = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.CI|Any CPU.Build.0 = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.CI|Any CPU.Deploy.0 = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
