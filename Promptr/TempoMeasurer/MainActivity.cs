@@ -19,6 +19,14 @@ namespace TempoMeasurer
     {
         int count = 1;
 
+        DateTime previousResultTimestamp;
+
+        const double alpha = 0.1;
+
+        double averageWordLengthPerSecond = 0;
+        private double slowThreshold = 15;
+        private double fastThreshold = 5;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -37,13 +45,14 @@ namespace TempoMeasurer
 
             button.Click += delegate {
                 button.Text = string.Format("{0} clicks!", count++);
+                BeginProcessing();
                 client.Blink();
            //     client.SetSpeechTempo(new Random().Next());
             };
 
             if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
             {
-       //         BeginProcessing();
+                BeginProcessing();
             } else
             {
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
@@ -57,7 +66,7 @@ namespace TempoMeasurer
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-          //          BeginProcessing();
+                    BeginProcessing();
                 }
             }
         }
@@ -72,9 +81,11 @@ namespace TempoMeasurer
                 Console.WriteLine(args.Error.ToString());
             };
 
+            previousResultTimestamp = DateTime.UtcNow;
+
             Intent recognizerIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
             recognizerIntent.PutExtra(RecognizerIntent.ExtraPartialResults, true);
-
+            recognizerIntent.PutExtra(RecognizerIntent.ExtraLanguage, "de-DE");
             recognizer.StartListening(recognizerIntent);
         }
 
@@ -92,12 +103,33 @@ namespace TempoMeasurer
 
         private void ProcessStrings(IList<string> strings)
         {
+            DateTime now = DateTime.UtcNow;
+
+            long duration = (long) now.Subtract(previousResultTimestamp).TotalSeconds;
+
             string result = "Results: ";
+            int wordlength = 0;
             foreach (string s in strings)
             {
+                wordlength += s.Length;
                 result += s + " ";
             }
             Console.WriteLine(result);
+
+            double averageWordLength = wordlength / duration;
+
+            averageWordLengthPerSecond = alpha * averageWordLength + (1 - alpha) * averageWordLengthPerSecond;
+
+            if (averageWordLengthPerSecond < slowThreshold)
+            {
+
+            } else if (averageWordLengthPerSecond > fastThreshold)
+            {
+
+            } else
+            {
+
+            }
         }
     }
 }
