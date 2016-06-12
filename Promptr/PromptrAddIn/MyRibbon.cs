@@ -20,11 +20,12 @@ namespace PromptrAddIn
         {
             Globals.ThisAddIn.Application.AfterPresentationOpen += (args) => { UpdateSlideButtons(); };
             Globals.ThisAddIn.Application.PresentationNewSlide += Application_PresentationNewSlide;
+            /*
             refreshButton.Click += (s, args) =>
             {
                 UpdateSlideButtons();
             };
-
+            */
             overwritten = new List<int>();
 
             TotalDurationDropDown.Items.Clear();
@@ -36,22 +37,22 @@ namespace PromptrAddIn
                 TotalDurationDropDown.Items.Add(item);
             }
 
-            slideMinuteDropDown.Items.Clear();
+            //slideMinuteDropDown.Items.Clear();
 
             for (int i = 0; i <= 20; i++)
             {
                 var item = Factory.CreateRibbonDropDownItem();
                 item.Label = i + "";
-                slideMinuteDropDown.Items.Add(item);
+                //slideMinuteDropDown.Items.Add(item);
             }
 
-            slideSecondsDropDown.Items.Clear();
+            //slideSecondsDropDown.Items.Clear();
 
             for (int i = 0; i <= 60; i++)
             {
                 var item = Factory.CreateRibbonDropDownItem();
                 item.Label = i + "";
-                slideSecondsDropDown.Items.Add(item);
+                //slideSecondsDropDown.Items.Add(item);
             }
 
             TotalDuration = new TimeSpan(0, 3, 0);
@@ -73,14 +74,14 @@ namespace PromptrAddIn
 
             int count = presentation.Slides.Count;
 
-            slidesDropDown.Items.Clear();
+            //slidesDropDown.Items.Clear();
 
             for (int i = 0; i < count; i++)
             {
                 int number = i + 1;
                 var item = Factory.CreateRibbonDropDownItem();
                 item.Label = presentation.Slides[number].Name;
-                slidesDropDown.Items.Add(item);
+                //slidesDropDown.Items.Add(item);
             }
 
             var oldDurations = SlideDurations;
@@ -113,7 +114,7 @@ namespace PromptrAddIn
                 }
             }
         }
-
+        /*
         private void slideSecondsDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
             int minutes = SlideDurations[currentSlideIndex].Minutes;
@@ -133,6 +134,7 @@ namespace PromptrAddIn
             slideMinuteDropDown.SelectedItemIndex = SlideDurations[currentSlideIndex].Minutes;
             slideSecondsDropDown.SelectedItemIndex = SlideDurations[currentSlideIndex].Seconds;
         }
+        
 
         private void slideMinuteDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
@@ -146,6 +148,8 @@ namespace PromptrAddIn
                 overwritten.Add(currentSlideIndex);
             }
         }
+        */
+
 
         private void TotalDurationDropDown_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
@@ -153,5 +157,7 @@ namespace PromptrAddIn
             Int32.TryParse(TotalDurationDropDown.SelectedItem.Label, out minutes);
             TotalDuration = new TimeSpan(0, minutes, 0);
         }
+
+
     }
 }
