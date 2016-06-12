@@ -10,7 +10,7 @@ using Android.Content.PM;
 using Android.Support.V4.App;
 using Android.Speech;
 using System.Collections.Generic;
-using PromptrLib;
+using TempoMeasurer.Connector;
 
 namespace TempoMeasurer
 {
