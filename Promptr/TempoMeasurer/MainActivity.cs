@@ -23,6 +23,10 @@ namespace TempoMeasurer
 
         const double alpha = 0.1;
 
+        TextView _displayText;
+
+        IList<string> lastResult;
+
         double averageWordLengthPerSecond = 0;
         private double slowThreshold = 15;
         private double fastThreshold = 5;
@@ -37,6 +41,9 @@ namespace TempoMeasurer
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
+
+            _displayText = FindViewById<TextView>(Resource.Id.text);
+            lastResult = new List<string>();
 
             //var client = new PromptrClient();
             //client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
@@ -57,6 +64,8 @@ namespace TempoMeasurer
             {
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
             }
+            
+            
                         
         }
 
@@ -87,12 +96,22 @@ namespace TempoMeasurer
             recognizerIntent.PutExtra(RecognizerIntent.ExtraPartialResults, true);
             recognizerIntent.PutExtra(RecognizerIntent.ExtraLanguage, "de-DE");
             recognizer.StartListening(recognizerIntent);
+
+            new Handler(Looper.MyLooper()).PostDelayed(() =>
+            {
+                if (DateTime.UtcNow.Subtract(previousResultTimestamp).TotalSeconds > 3)
+                {
+                    BeginProcessing();
+                }
+            }, 3500);
         }
 
         private void Recognizer_Results(object sender, ResultsEventArgs e)
         {
             IList<string> results = e.Results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
             ProcessStrings(results);
+            Console.WriteLine("Result received.");
+            BeginProcessing();
         }
 
         private void Recognizer_PartialResults(object sender, PartialResultsEventArgs e)
@@ -105,20 +124,34 @@ namespace TempoMeasurer
         {
             DateTime now = DateTime.UtcNow;
 
-            long duration = (long) now.Subtract(previousResultTimestamp).TotalSeconds;
+            double duration = now.Subtract(previousResultTimestamp).TotalSeconds;
+
+            if (duration == 0) duration = .01;
 
             string result = "Results: ";
             int wordlength = 0;
-            foreach (string s in strings)
+
+            int i = 0;
+            while (i < strings.Count && i < lastResult.Count && lastResult[i].Equals(strings[i]))
             {
+                i++;
+            }
+            result += i + " ";
+            for (int j = i; j < strings.Count; j++)
+            {
+                string s = strings[j];
                 wordlength += s.Length;
                 result += s + " ";
             }
             Console.WriteLine(result);
 
+            lastResult = strings;
+
             double averageWordLength = wordlength / duration;
 
             averageWordLengthPerSecond = alpha * averageWordLength + (1 - alpha) * averageWordLengthPerSecond;
+
+            _displayText.Text = averageWordLengthPerSecond + "";
 
             if (averageWordLengthPerSecond < slowThreshold)
             {
