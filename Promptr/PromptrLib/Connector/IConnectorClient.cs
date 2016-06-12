@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptrLib
+namespace PromptrLib.Connector
 {
     /*
      * Interface for handling all the hardware calls to the Hue Bridge 

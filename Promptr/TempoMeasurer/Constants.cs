@@ -1,4 +1,4 @@
-﻿namespace PromptrLib
+﻿namespace TempoMeasurer
 {
     /*
      * Constant class for all important constants

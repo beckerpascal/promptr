@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptrLib
+namespace TempoMeasurer.Connector
 {
     /*
      * Interface for handling all the hardware calls to the Hue Bridge 

@@ -1,7 +1,7 @@
 ﻿using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 
-namespace PromptrLib
+namespace TempoMeasurer.Connector
 {
     /*
      * Factory for creating connections with a specific Hue Bridge defined in the Constants class
