@@ -11,12 +11,16 @@ using Android.Support.V4.App;
 using Android.Speech;
 using System.Collections.Generic;
 using TempoMeasurer.Connector;
+using System.Timers;
 
 namespace TempoMeasurer
 {
     [Activity(Label = "TempoMeasurer", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        private Timer blinkTimer;
+        private IConnectorClient client = new ConnectorClient();
+
         int count = 1;
 
         DateTime previousResultTimestamp;
@@ -45,16 +49,9 @@ namespace TempoMeasurer
             _displayText = FindViewById<TextView>(Resource.Id.text);
             lastResult = new List<string>();
 
-            //var client = new PromptrClient();
-            //client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
-            var client = new ConnectorClient();
-            client.TurnOn();
-
             button.Click += delegate {
                 button.Text = string.Format("{0} clicks!", count++);
                 BeginProcessing();
-                client.Blink();
-           //     client.SetSpeechTempo(new Random().Next());
             };
 
             if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
@@ -181,6 +178,40 @@ namespace TempoMeasurer
             {
 
             }
+        }
+
+        private void BlinkHighSpeed()
+        {
+            StopBlinking();
+
+            blinkTimer = new Timer(500);
+            blinkTimer.AutoReset = true;
+            blinkTimer.Elapsed += (sender, args) =>
+            {
+                client.Blink(2);
+            };
+            blinkTimer.Start();
+        }
+
+        private void StopBlinking()
+        {
+            if (blinkTimer != null)
+            {
+                blinkTimer.Stop();
+            }
+        }
+
+        private void BlinkLowSpeed()
+        {
+            StopBlinking();
+
+            blinkTimer = new Timer(2000);
+            blinkTimer.AutoReset = true;
+            blinkTimer.Elapsed += (sender, args) =>
+            {
+                client.Blink(2);
+            };
+            blinkTimer.Start();
         }
     }
 }
