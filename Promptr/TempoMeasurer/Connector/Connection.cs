@@ -183,7 +183,7 @@ namespace TempoMeasurer.Connector
             }
             catch (Exception)
             {
-                throw;
+                
             }
 
         }
@@ -201,9 +201,7 @@ namespace TempoMeasurer.Connector
             }
             catch (Exception)
             {
-                throw;
-
-
+                
             }
         }
     }
