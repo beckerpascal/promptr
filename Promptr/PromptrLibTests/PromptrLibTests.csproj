@@ -78,6 +78,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PromptrLib\PromptrLib.csproj">
+      <Project>{c2a37c88-1fb9-4c47-8685-c1d269b87ee7}</Project>
+      <Name>PromptrLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
