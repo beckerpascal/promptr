@@ -5,6 +5,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android;
+using Android.Content.PM;
+using Android.Support.V4.App;
 
 namespace TempoMeasurer
 {
@@ -24,7 +27,32 @@ namespace TempoMeasurer
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            var client = new PromptrLib.Logic.PromptrClient();
+
+            button.Click += delegate {
+                button.Text = string.Format("{0} clicks!", count++);
+                client.SetSpeechTempo(new Random().Next());
+            };
+
+            if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
+            {
+                AudioThread thread = new AudioThread();
+            } else
+            {
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
+            }
+                        
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            if (requestCode == 312)
+            {
+                if (grantResults[0] == Permission.Granted)
+                {
+                    AudioThread thread = new AudioThread();
+                }
+            }
         }
     }
 }

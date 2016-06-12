@@ -19,6 +19,8 @@ namespace PromptrLib.Logic
 
         private Timer slideTimer;
 
+        private Timer blinkTimer;
+
         private int currentBulb;
 
         private int currentSlide;
@@ -89,6 +91,36 @@ namespace PromptrLib.Logic
             currentBulb++;
             connection.Fade(new TimeSpan(0, 0, (int)TotalDuration.TotalSeconds / 3), "#60854E", "#FF0000", currentBulb);
             
+        }
+
+        public void SetSpeechTempo(int tempoLevel)
+        {
+            if (tempoLevel < 0)
+            {
+                blinkTimer = InitializeBlinkTimer(1500);
+                blinkTimer.Start();
+            }
+            else if (tempoLevel > 0)
+            {
+                blinkTimer = InitializeBlinkTimer(750);
+                blinkTimer.Start();
+            }
+            else
+            {
+                if (blinkTimer != null) blinkTimer.Stop();
+            }
+        }
+
+        private Timer InitializeBlinkTimer(int interval)
+        {
+            Timer timer = new Timer(interval);
+            timer.AutoReset = true;
+            timer.Elapsed += (sender, args) =>
+            {
+                connection.Blink(currentBulb);
+            };
+
+            return timer;
         }
     }
 }

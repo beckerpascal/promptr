@@ -30,6 +30,11 @@ namespace TempoMeasurer
             short[][] buffers = new short[256][];
             int ix = 0;
 
+            for (int i = 0; i < 256; i++)
+            {
+                buffers[i] = new short[160];
+            }
+
             try
             { // ... initialise
 
@@ -56,7 +61,7 @@ namespace TempoMeasurer
             }
             catch (Throwable x)
             {
-                //
+                Console.WriteLine(x.GetType() + " " + x.Message);
             }
             finally
             {

@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="TempoMeasurer.TempoMeasurer" android:versionCode="1" android:versionName="1.0">
-  <uses-sdk android:minSdkVersion="16" />
-  <application android:label="TempoMeasurer"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.promptr.tempo" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<application android:label="TempoMeasurer" android:icon="@drawable/Icon">
+		
+	</application>
 </manifest>

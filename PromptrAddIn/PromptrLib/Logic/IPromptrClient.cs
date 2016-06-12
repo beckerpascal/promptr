@@ -13,5 +13,7 @@ namespace PromptrLib.Logic
         void EndCountdown();
 
         void SetCurrentSlideNumber(int number);
+
+        void SetSpeechTempo(int tempoLevel);
     }
 }
