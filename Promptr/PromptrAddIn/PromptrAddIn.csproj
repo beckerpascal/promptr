@@ -27,13 +27,36 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>PromptrAddIn</RootNamespace>
     <AssemblyName>PromptrAddIn</AssemblyName>
-    <LoadBehavior>3</LoadBehavior>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
+    <PublishUrl>C:\Users\Kevin\Source\Repos\philipshue\Promptr\PromptrAddIn\Publish\</PublishUrl>
+    <InstallUrl />
+    <TargetCulture>en</TargetCulture>
+    <ApplicationVersion>1.0.0.1</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <ProductName>PromptrAddIn</ProductName>
+    <PublisherName />
+    <SupportUrl />
+    <FriendlyName>PromptrAddIn</FriendlyName>
+    <OfficeApplicationDescription />
+    <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
@@ -185,6 +208,18 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Microsoft.Office.Tools.Common.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Microsoft.Office.Tools.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Microsoft.Office.Tools.v4.0.Framework.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Microsoft.VisualStudio.Tools.Applications.Runtime.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Newtonsoft.Json.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\PromptrAddIn.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\PromptrAddIn.dll.manifest" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\PromptrAddIn.vsto" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\PromptrLib.dll.deploy" />
+    <None Include="Publish\Application Files\PromptrAddIn_1_0_0_0\Q42.HueApi.dll.deploy" />
+    <None Include="Publish\PromptrAddIn.vsto" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
@@ -198,6 +233,9 @@
       <Project>{c2a37c88-1fb9-4c47-8685-c1d269b87ee7}</Project>
       <Name>PromptrLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Publish\setup.exe" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -221,8 +259,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="PowerPoint" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="PowerPoint" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\PowerPoint\InstallRoot\Path#powerpnt.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
-        <Host Name="PowerPoint" GeneratedCodeNamespace="PromptrAddIn" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+        <Host Name="PowerPoint" GeneratedCodeNamespace="PromptrAddIn" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="50D1D2766F16F914E41C57D2E78B790CCFE1F700" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

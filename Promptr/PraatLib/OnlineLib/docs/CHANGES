@@ -1,0 +1,20 @@
+Changes from 0.3alpha to 0.3
+----------------------------
+
+* The library now compiles into libpraat.a rather than praat.a
+* Documentation update
+
+Changes from 0.2 to 0.3alpha:
+-----------------------------
+
+* Praatlib 0.3 is based on Praat 5.0.3.0.
+
+* The window function constants have been adjusted to reflect the
+corresponding changes in praat. Look them up in "src/library/praatsound.h"
+for now. In particular, "wfNone" has become "wfRectangular".
+
+* This new version of Praat has more library dependencies. See the
+"makefile" in "sample" directory for the linker arguments (the stuff at the
+end of the "g++" command line).
+
+* Incorporated the patch suggested by Benoit and a bugfix by Joan.
