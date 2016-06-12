@@ -42,7 +42,7 @@ Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen 
 
 Zur Installation des AddIns wird das vorkompilierte und gepackte AddIn im Ordner *Installation* in PowerPoint installiert.
 
-*Momentan muss die IP und der Hue AppKey nich in der Constants-Klasse angegeben werden. In neueren Versionen wird dies allerdings über ein Einstellungsfeld definierbar sein.*
+*Momentan muss die IP und der Hue AppKey noch in der Constants-Klasse angegeben werden. In neueren Versionen wird dies allerdings über ein Einstellungsfeld definierbar sein.*
 
 ##Installation der Feedback App
 
