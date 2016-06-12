@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Timers;
 using PromptrLib.Connector;
+using System.Threading.Tasks;
 
 namespace PromptrLib.Logic
 {
@@ -17,12 +18,14 @@ namespace PromptrLib.Logic
         private Timer _blinkTimer;
 
         // Private members for handling bulbs and slides
+        private int _percent;
         private int _currentBulb;
         private int _currentSlide;
+        private Timer endTimer;
 
         /*
          * Constructor for creating a new PromptrClient with connection, timer and starting with bulb 0
-         */ 
+         */
         public PromptrClient()
         {
             _connection = new ConnectorClient();
@@ -36,6 +39,7 @@ namespace PromptrLib.Logic
         public void EndCountdown()
         {
             _connection.TurnOff();
+            endTimer.Stop();
         }
 
         /*
@@ -67,29 +71,47 @@ namespace PromptrLib.Logic
         {
             _totalDuration = totalDuration;
             _slideDurations = slideDurations;
-            _currentBulb = 0;
+            _currentBulb = 1;
 
             _connection.TurnOn(Constants.COLOR_LIME);
 
-            _timer = new Timer(_totalDuration.TotalMilliseconds / Constants.AMOUNT_OF_BULBS);
+            _timer = new Timer(_totalDuration.TotalMilliseconds / (Constants.AMOUNT_OF_BULBS * 100));
             _timer.AutoReset = true;
             _timer.Elapsed += (sender, args) =>
             {
+                _percent++;
                 FadeCurrentLight();
+                if (_percent == 100)
+                {
+                    _percent = 0;
+                    _currentBulb++;
+                }
+
+
                 if (_currentBulb > Constants.AMOUNT_OF_BULBS)
                 {
                     _timer.Stop();
+                    _connection.TurnOff();
                 }
             };
 
-            FadeCurrentLight();
+
+            InitiateFade();
 
             _timer.Start();
 
-            System.Timers.Timer endTimer = new System.Timers.Timer(_totalDuration.TotalMilliseconds * 5 / 6);
+            endTimer = new System.Timers.Timer(_totalDuration.TotalMilliseconds * 5 / 6);
             endTimer.AutoReset = false;
             endTimer.Elapsed += (sender, args) =>
             {
+                _connection.Blink();
+
+                System.Threading.Thread.Sleep(1000);
+
+                _connection.Blink();
+
+                System.Threading.Thread.Sleep(1000);
+
                 _connection.Blink();
 
                 System.Threading.Thread.Sleep(1000);
@@ -106,14 +128,19 @@ namespace PromptrLib.Logic
 
         }
 
+        private async void InitiateFade()
+        {
+            await Task.Delay(1000);
+            FadeCurrentLight();
+        }
+
         /*
          * Fades the current light starting with the current bulb from start to end color in the specified time
          */ 
         private void FadeCurrentLight()
         {
-            _currentBulb++;
-            _connection.Fade(new TimeSpan(0, 0, (int)_totalDuration.TotalSeconds / Constants.AMOUNT_OF_BULBS), Constants.COLOR_LIME, Constants.COLOR_RED, _currentBulb);
-            
+            //     _connection.Fade(new TimeSpan(0, 0, (int)_totalDuration.TotalSeconds / Constants.AMOUNT_OF_BULBS), Constants.COLOR_LIME, Constants.COLOR_RED, _currentBulb);
+            _connection.Fade(_percent, Constants.COLOR_LIME, Constants.COLOR_RED, _currentBulb);
         }
 
         public void SetSpeechTempo(int tempoLevel)

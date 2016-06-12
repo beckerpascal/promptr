@@ -12,6 +12,7 @@ using Android.Speech;
 using System.Collections.Generic;
 using TempoMeasurer.Connector;
 using System.Timers;
+using Java.Lang;
 
 namespace TempoMeasurer
 {
@@ -19,7 +20,13 @@ namespace TempoMeasurer
     public class MainActivity : Activity
     {
         private Timer blinkTimer;
-        private IConnectorClient client = new ConnectorClient();
+        private IConnectorClient client;
+
+        private ImageView _turtle;
+        private ImageView _rabbit;
+        private ImageView _man;
+
+        private View _animatedView;
 
         int count = 1;
 
@@ -42,28 +49,96 @@ namespace TempoMeasurer
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            _turtle = FindViewById<ImageView>(Resource.Id.slowerButton);
+            _rabbit = FindViewById<ImageView>(Resource.Id.fasterButton);
+            _man = FindViewById<ImageView>(Resource.Id.normalButton);
 
-            _displayText = FindViewById<TextView>(Resource.Id.text);
-            lastResult = new List<string>();
-
-            button.Click += delegate {
-                button.Text = string.Format("{0} clicks!", count++);
-                BeginProcessing();
+            _turtle.Click += (sender, args) =>
+            {
+                ShowActive(_turtle);
+                ShowInactive(_rabbit);
+                ShowInactive(_man);
+                BlinkLowSpeed();
             };
+
+            _rabbit.Click += (sender, args) =>
+            {
+                ShowActive(_rabbit);
+                ShowInactive(_turtle);
+                ShowInactive(_man);
+                BlinkHighSpeed();
+            };
+
+            _man.Click += (sender, args) =>
+            {
+                ShowPassive(_man);
+                ShowInactive(_rabbit);
+                ShowInactive(_turtle);
+                StopBlinking();
+            };
+
+            try
+            {
+                client = new ConnectorClient();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            lastResult = new List<string>();
 
             if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
             {
                 BeginProcessing();
-            } else
+            }
+            else
             {
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
             }
-            
-            
-                        
+
+
+
+        }
+
+        private void ShowPassive(ImageView view)
+        {
+            view.Alpha = 1f;
+            _animatedView = null;
+            view.Animate().ScaleX(1f).ScaleY(1f).Rotation(0).SetDuration(500).Start();
+        }
+
+        private void ShowActive(ImageView view)
+        {
+            _animatedView = view;
+            view.Alpha = 1f;
+            view.Animate().Rotation(15f).ScaleX(1.1f).ScaleY(1.1f).SetDuration(500).WithEndAction(RotateLeft()).Start();
+        }
+
+        private Runnable RotateLeft(bool grow = false)
+        {
+            return new Runnable(() =>
+            {
+                if (_animatedView == null) return;
+                float scale = grow ? 1.1f : 1f;
+                _animatedView.Animate().Rotation(-30f).ScaleX(scale).ScaleY(scale).SetDuration(500).WithEndAction(RotateRight(!grow)).Start();
+            });
+        }
+
+        private Runnable RotateRight(bool grow = false)
+        {
+            return new Runnable(() =>
+            {
+                if (_animatedView == null) return;
+                float scale = grow ? 1.1f : 1f;
+                _animatedView.Animate().Rotation(15f).ScaleX(scale).ScaleY(scale).SetDuration(500).WithEndAction(RotateLeft(grow)).Start();
+            });
+        }
+
+        private void ShowInactive(ImageView view)
+        {
+            view.Alpha = .85f;
+            view.Animate().ScaleX(1f).ScaleY(1f).Rotation(0).SetDuration(500).Start();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
@@ -72,7 +147,7 @@ namespace TempoMeasurer
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-     //               BeginProcessing();
+                      BeginProcessing();
                 }
             }
         }
@@ -108,7 +183,7 @@ namespace TempoMeasurer
             IList<string> results = e.Results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
             ProcessStrings(results);
             Console.WriteLine("Result received.");
-     //       BeginProcessing();
+            BeginProcessing();
         }
 
         private void Recognizer_PartialResults(object sender, PartialResultsEventArgs e)
@@ -184,7 +259,7 @@ namespace TempoMeasurer
         {
             StopBlinking();
 
-            blinkTimer = new Timer(500);
+            blinkTimer = new Timer(650);
             blinkTimer.AutoReset = true;
             blinkTimer.Elapsed += (sender, args) =>
             {

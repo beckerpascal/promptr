@@ -5,11 +5,11 @@ Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellu
 ![Screenshot des AddIns in PowerPoint](https://github.com/famalgosner/philipshue/blob/master/Media/Screenshot.PNG)
 *Screenshot des AddIns*
 
-![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/PhotoHueBox.PNG)
+![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/PhotoHueBox.jpg)
 
 *Foto der Philips Hues im Präsentationsmodus*
 
-![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/ScreenshotApp.PNG)
+![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/ScreenshotApp.png)
 
 *Screenshot der Feedback-App*
 

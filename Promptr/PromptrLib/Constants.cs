@@ -10,7 +10,7 @@
         public static string APPKEY      = "x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8";
         public static string COLOR_RED   = "#FF0000";
         public static string COLOR_GREEN = "#00FF00";
-        public static string COLOR_LIME  = "60854E";
+        public static string COLOR_LIME  = "#60854E";
 
         public static int AMOUNT_OF_BULBS = 3;
     }
