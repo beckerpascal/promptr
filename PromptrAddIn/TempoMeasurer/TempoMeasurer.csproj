@@ -79,12 +79,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\style.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PromptrLib\PromptrLib.csproj">
-      <Project>{c2a37c88-1fb9-4c47-8685-c1d269b87ee7}</Project>
-      <Name>PromptrLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

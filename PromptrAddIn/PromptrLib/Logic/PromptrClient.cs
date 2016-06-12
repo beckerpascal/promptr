@@ -85,11 +85,21 @@ namespace PromptrLib.Logic
 
             _timer.Start();
 
-            Timer endTimer = new Timer(_totalDuration.TotalMilliseconds - 30000);
+            System.Timers.Timer endTimer = new System.Timers.Timer(_totalDuration.TotalMilliseconds * 5 / 6);
+            endTimer.AutoReset = false;
             endTimer.Elapsed += (sender, args) =>
             {
                 _connection.Blink();
-                
+
+                System.Threading.Thread.Sleep(1000);
+
+                _connection.Blink();
+
+                System.Threading.Thread.Sleep(1000);
+
+                _connection.Blink();
+
+
             };
             endTimer.Start();
 

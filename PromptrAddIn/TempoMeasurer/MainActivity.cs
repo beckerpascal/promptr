@@ -28,6 +28,7 @@ namespace TempoMeasurer
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
             var client = new PromptrLib.Logic.PromptrClient();
+            client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
 
             button.Click += delegate {
                 button.Text = string.Format("{0} clicks!", count++);
