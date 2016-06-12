@@ -2,6 +2,9 @@
 
 namespace PromptrLib
 {
+    /*
+     * Interface for handling all the hardware calls to the Hue Bridge 
+     */ 
     public interface IConnectorClient
     {
         void TurnOn();

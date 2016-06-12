@@ -10,15 +10,14 @@ namespace PromptrLibTests
     [TestClass]
     public class ConnectionTests
     {
-        private ConnectionFactory connFactory;
-        private Connection target;
+        private readonly ConnectionFactory connFactory = new ConnectionFactory(Constants.APPKEY);
+        private Connection _target;
 
         [TestInitialize]
         public async void Initialize()
         {
-            ConnectionFactory connFactory = new ConnectionFactory("x6gkNkXAp7Gv5yatJEXFahEE8oYkpe6SjKFOZKI8");
-            target = connFactory.GetConnection();
-            await target.TurnOn();
+            _target = connFactory.GetConnection();
+            await _target.TurnOn();
         }
         
         [TestMethod]
@@ -26,7 +25,7 @@ namespace PromptrLibTests
         {
             for (int i = 0; i < 100; i++)
             {
-                await target.Fade(i, "#00FF00", "#FF0000", 1);
+                await _target.Fade(i, Constants.COLOR_GREEN, Constants.COLOR_RED, 1);
                 Thread.Sleep(30);
             }
         }
@@ -34,13 +33,19 @@ namespace PromptrLibTests
         [TestMethod]
         public async Task Blink()
         {
-            await target.Blink(1);
+            await _target.Blink(1);
+        }
+        
+        [TestMethod]
+        public async Task BlinkAll()
+        {
+            await _target.Blink();
         }
 
         [TestCleanup]
         public async void Cleanup()
         {
-            await target.TurnOff();
+            await _target.TurnOff();
         }
         
     }
