@@ -2,7 +2,7 @@
 
 Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
 
-![Screenshot des AddIns in PowerPoint](Media/Screenshot.png)
+![Screenshot des AddIns in PowerPoint](https://github.com/famalgosner/philipshue/blob/master/Media/Screenshot.PNG)
 
 Dieses wird einfach und komfortabel installiert auf einem PC oder Mac über einen bereitgestellten Link.
 
@@ -26,7 +26,7 @@ Ein weiteres tolles Feature ist das Feedback zu der Sprachgeschwindigkeit währe
 
 Dies ist auf zwei Wegen möglich und zwar indem man die maximale Zeit für die gesamte Folie angibt und diese dann durch die Anzahl der Folien dividiert wird, oder, dass man jeder Folie seine Zeitdauer vorgibt und sich dadurch die Gesamtdauer der Präsentation ergibt.
 
-Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen pulsierens, für zu langsames Vortragen pulsieren die Lampen als Hinweis schneller.
+Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen pulsieren, für zu langsames Vortragen pulsieren die Lampen als Hinweis schneller.
 
 ##Installation
 
