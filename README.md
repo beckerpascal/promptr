@@ -3,6 +3,7 @@
 Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
 
 ![Screenshot des AddIns in PowerPoint](https://github.com/famalgosner/philipshue/blob/master/Media/Screenshot.PNG)
+
 *Screenshot des AddIns*
 
 ![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/PhotoHueBox.jpg)
@@ -37,11 +38,15 @@ Dies ist auf zwei Wegen möglich und zwar indem man die maximale Zeit für die g
 
 Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen pulsieren, für zu langsames Vortragen pulsieren die Lampen als Hinweis schneller.
 
-##Installation
+##Installation PowerPoint AddIn
 
-Zur Installation des AddIns wird das vorkompilierte und gepackte AddIn im Ordner **Installation** in PowerPoint installiert.
+Zur Installation des AddIns wird das vorkompilierte und gepackte AddIn im Ordner *Installation* in PowerPoint installiert.
 
-Momentan muss die IP und der Hue AppKey nich in der Constants-Klasse angegeben werden. In neueren Versionen wird dies allerdings über ein Einstellungsfeld definierbar sein.
+*Momentan muss die IP und der Hue AppKey nich in der Constants-Klasse angegeben werden. In neueren Versionen wird dies allerdings über ein Einstellungsfeld definierbar sein.*
+
+##Installation der Feedback App
+
+Zur Installation der Feedback App kann die sich im Ordner *Installation* befindende apk-Datei auf dem Android-Smartphone installiert werden.
 
 ##Future Features
 
