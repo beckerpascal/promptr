@@ -10,6 +10,7 @@ using Android.Content.PM;
 using Android.Support.V4.App;
 using Android.Speech;
 using System.Collections.Generic;
+using PromptrLib;
 
 namespace TempoMeasurer
 {
@@ -29,17 +30,20 @@ namespace TempoMeasurer
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            var client = new PromptrClient();
-            client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
+            //var client = new PromptrClient();
+            //client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
+            var client = new ConnectorClient();
+            client.TurnOn();
 
             button.Click += delegate {
                 button.Text = string.Format("{0} clicks!", count++);
-                client.SetSpeechTempo(new Random().Next());
+                client.Blink();
+           //     client.SetSpeechTempo(new Random().Next());
             };
 
             if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
             {
-                BeginProcessing();
+       //         BeginProcessing();
             } else
             {
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
@@ -53,7 +57,7 @@ namespace TempoMeasurer
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    BeginProcessing();
+          //          BeginProcessing();
                 }
             }
         }
@@ -63,22 +67,37 @@ namespace TempoMeasurer
             SpeechRecognizer recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
             recognizer.PartialResults += Recognizer_PartialResults;
             recognizer.Results += Recognizer_Results;
+            recognizer.Error += (sender, args) =>
+            {
+                Console.WriteLine(args.Error.ToString());
+            };
+
+            Intent recognizerIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+            recognizerIntent.PutExtra(RecognizerIntent.ExtraPartialResults, true);
+
+            recognizer.StartListening(recognizerIntent);
         }
 
         private void Recognizer_Results(object sender, ResultsEventArgs e)
         {
             IList<string> results = e.Results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
-            string result = "Results: ";
-            foreach (string s in results)
-            {
-                result += s + " ";
-            }
-            Console.WriteLine()
+            ProcessStrings(results);
         }
 
         private void Recognizer_PartialResults(object sender, PartialResultsEventArgs e)
         {
             IList<string> results = e.PartialResults.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
+            ProcessStrings(results);
+        }
+
+        private void ProcessStrings(IList<string> strings)
+        {
+            string result = "Results: ";
+            foreach (string s in strings)
+            {
+                result += s + " ";
+            }
+            Console.WriteLine(result);
         }
     }
 }
