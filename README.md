@@ -1,6 +1,8 @@
 #Promptr
 
-Wir haben ein AdIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
+Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
+
+![Screenshot des AddIns in PowerPoint](Media/Screenshot.png)
 
 Dieses wird einfach und komfortabel installiert auf einem PC oder Mac über einen bereitgestellten Link.
 
