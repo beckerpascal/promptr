@@ -1,7 +1,7 @@
 ﻿using Java.Lang;
 using System.Drawing;
 
-namespace PromptrLib.Connector
+namespace TempoMeasurer.Connector
 {
     /*
      * Class for processing calculations with colors

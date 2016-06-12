@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Timers;
+using PromptrLib.Connector;
 
 namespace PromptrLib.Logic
 {
     public class PromptrClient : IPromptrClient
     {
         // Private member for handling the connection for the whole lifetime
-        private IConnectorClient _connection;
+        private readonly IConnectorClient _connection;
 
         // Private members for timers and timespans
         private TimeSpan _totalDuration;

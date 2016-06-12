@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PromptrLib.Connector;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 
-namespace PromptrLib
+namespace TempoMeasurer.Connector
 {
     /*
      * Class for the handling the calls between the Promptr library and the Hue hardware

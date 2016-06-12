@@ -5,7 +5,7 @@ using PromptrLib.Connector;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 
-namespace PromptrLib
+namespace PromptrLib.Connector
 {
     /*
      * Class for the handling the calls between the Promptr library and the Hue hardware
