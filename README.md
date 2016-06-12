@@ -1,6 +1,8 @@
 #Promptr
 
-Wir haben ein AdIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
+Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
+
+![Screenshot des AddIns in PowerPoint](https://github.com/famalgosner/philipshue/blob/master/Media/Screenshot.PNG)
 
 Dieses wird einfach und komfortabel installiert auf einem PC oder Mac über einen bereitgestellten Link.
 
@@ -12,7 +14,7 @@ Das Gerät interagiert mit einer Station von 3 Philips Hue Lampen, welche mit Hi
 
 Der Countdown für den Farbwechsel der Lampen startet gemeinsam mit dem Start der PowerPoint Präsentation.
 
-Jede Lampe steht für 1/3 der jeweiligen Zeitdauer der Präsentation, in unserem Fall also mit insgesamt 3 Minuten Präsentationsdauer steht somit jede Lampe für eine Minute und durchläuft einen Farbwechsel von einem hellen grün hin zu einem dunklen rot und schaltet sich nach erreichen des dunkelsten Rottons ganz ab.
+Jede Lampe steht für 1/(n=Anzahl Glühbirnen) der jeweiligen Zeitdauer der Präsentation, in unserem Fall also mit insgesamt 3 Minuten Präsentationsdauer steht somit jede Lampe für eine Minute und durchläuft einen Farbwechsel von einem hellen grün (Ein sattes Grün ist technisch nicht möglich (Gamut B)) hin zu einem dunklen rot und schaltet sich nach erreichen des dunkelsten Rottons ganz ab.
 
 Die letzte Lampe (die dritte) gibt ab der Hälfte der ihr zugewiesenen Zeit (also zu Beginn der letzten 30 Sekunden zum Zeitpunkt 2min30s) ein extra Feedback, welches durch ein kurzes Pulsieren dargestellt wird, das gleiche passiert erneut nach erreichen der letzten 20 Sekunden mit einem kurzen aber etwas intensiveren Pulsieren und beim erreichen der letzten 10 Sekunden erfolgt das pulsieren im Sekundentakt bis zum Ablauf der Gesamtzeit.
 
@@ -24,12 +26,16 @@ Ein weiteres tolles Feature ist das Feedback zu der Sprachgeschwindigkeit währe
 
 Dies ist auf zwei Wegen möglich und zwar indem man die maximale Zeit für die gesamte Folie angibt und diese dann durch die Anzahl der Folien dividiert wird, oder, dass man jeder Folie seine Zeitdauer vorgibt und sich dadurch die Gesamtdauer der Präsentation ergibt.
 
-Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen pulsierens, für zu langsames Vortragen pulsieren die Lampen als Hinweis schneller.
+Es erfolgt dann ein Hinweis für zu schnelles Vortragen in Form eines langsamen pulsieren, für zu langsames Vortragen pulsieren die Lampen als Hinweis schneller.
 
 ##Installation
 
-...
+Zur Installation des AddIns wird das vorkompilierte und gepackte AddIn im Ordner **Installation** in PowerPoint installiert.
+
+Momentan muss die IP und der Hue AppKey nich in der Constants-Klasse angegeben werden. In neueren Versionen wird dies allerdings über ein Einstellungsfeld definierbar sein.
 
 ##Future Features
 
-...
+* Weitere Einstellungsmöglichkeiten für das AddIn (IP/AutoDiscover, AppKey, Helligkeit, ...)
+* Automatische Erkennung der Sprachgeschwindigkeit
+* ... 
