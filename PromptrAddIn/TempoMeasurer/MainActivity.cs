@@ -8,6 +8,8 @@ using Android.OS;
 using Android;
 using Android.Content.PM;
 using Android.Support.V4.App;
+using Android.Speech;
+using System.Collections.Generic;
 
 namespace TempoMeasurer
 {
@@ -27,7 +29,7 @@ namespace TempoMeasurer
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            var client = new PromptrLib.Logic.PromptrClient();
+            var client = new PromptrClient();
             client.StartCountdown(new TimeSpan(0, 3, 0), new TimeSpan[0]);
 
             button.Click += delegate {
@@ -37,7 +39,7 @@ namespace TempoMeasurer
 
             if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == Permission.Granted)
             {
-                AudioThread thread = new AudioThread();
+                BeginProcessing();
             } else
             {
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 312);
@@ -51,9 +53,32 @@ namespace TempoMeasurer
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    AudioThread thread = new AudioThread();
+                    BeginProcessing();
                 }
             }
+        }
+
+        private void BeginProcessing()
+        {
+            SpeechRecognizer recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
+            recognizer.PartialResults += Recognizer_PartialResults;
+            recognizer.Results += Recognizer_Results;
+        }
+
+        private void Recognizer_Results(object sender, ResultsEventArgs e)
+        {
+            IList<string> results = e.Results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
+            string result = "Results: ";
+            foreach (string s in results)
+            {
+                result += s + " ";
+            }
+            Console.WriteLine()
+        }
+
+        private void Recognizer_PartialResults(object sender, PartialResultsEventArgs e)
+        {
+            IList<string> results = e.PartialResults.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
         }
     }
 }
