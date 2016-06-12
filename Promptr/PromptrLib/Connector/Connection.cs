@@ -171,7 +171,6 @@ namespace PromptrLib.Connector
             }
             catch (Exception)
             {
-                throw;
             }
             
         }
@@ -188,7 +187,6 @@ namespace PromptrLib.Connector
             }
             catch (Exception)
             {
-                throw;
             }
         }
         
