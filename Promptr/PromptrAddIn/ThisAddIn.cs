@@ -33,7 +33,9 @@ namespace PromptrAddIn
             started = true;
 
             var ribbon = Globals.Ribbons.GetRibbon<MyRibbon>();
-            
+
+
+            client = new PromptrClient();
             client.StartCountdown(ribbon.TotalDuration, ribbon.SlideDurations);
         }
 
