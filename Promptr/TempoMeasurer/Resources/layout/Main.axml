@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <Button
-        android:id="@+id/MyButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Hello" />
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="0"
-        android:textSize="64sp" />
-</LinearLayout>
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/fasterButton"
+        android:layout_above="@+id/normalButton"
+        android:layout_centerInParent="true"
+        android:src="@drawable/rabbit"
+        android:layout_margin="15dp"
+        android:background="@drawable/circle" />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/slowerButton"
+        android:src="@drawable/turtle"
+        android:layout_below="@+id/normalButton"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:background="@drawable/circle" />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/normalButton"
+        android:src="@drawable/man"
+        android:layout_margin="15dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circle" />
+</RelativeLayout>

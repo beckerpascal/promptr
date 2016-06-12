@@ -37,6 +37,8 @@ namespace PromptrAddIn
                 TotalDurationDropDown.Items.Add(item);
             }
 
+            TotalDurationDropDown.SelectedItemIndex = 3;
+
             //slideMinuteDropDown.Items.Clear();
 
             for (int i = 0; i <= 20; i++)

@@ -45,7 +45,19 @@ namespace TempoMeasurer
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int circle = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int man = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int rabbit = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int turtle = 2130837508;
 			
 			static Drawable()
 			{
@@ -61,10 +73,13 @@ namespace TempoMeasurer
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int MyButton = 2131034112;
+			public const int fasterButton = 2131034112;
 			
 			// aapt resource value: 0x7f050001
-			public const int text = 2131034113;
+			public const int normalButton = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int slowerButton = 2131034114;
 			
 			static Id()
 			{
