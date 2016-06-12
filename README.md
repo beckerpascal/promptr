@@ -3,6 +3,15 @@
 Wir haben ein AddIn für PowerPoint programmiert, dessen Aufgabe die Hilfestellung bei der zeitliche Einhaltung der Dauer einer Präsentation ist.
 
 ![Screenshot des AddIns in PowerPoint](https://github.com/famalgosner/philipshue/blob/master/Media/Screenshot.PNG)
+*Screenshot des AddIns*
+
+![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/PhotoHueBox.PNG)
+
+*Foto der Philips Hues im Präsentationsmodus*
+
+![Foto der Philips Hues im Präsentationsmodus](https://github.com/famalgosner/philipshue/blob/master/Media/ScreenshotApp.PNG)
+
+*Screenshot der Feedback-App*
 
 Dieses wird einfach und komfortabel installiert auf einem PC oder Mac über einen bereitgestellten Link.
 
