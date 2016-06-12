@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PromptrLib;
-using Q42.HueApi;
+using PromptrLib.Connector;
 
 namespace PromptrLibTests
 {
