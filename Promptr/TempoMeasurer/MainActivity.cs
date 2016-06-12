@@ -75,7 +75,7 @@ namespace TempoMeasurer
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    BeginProcessing();
+     //               BeginProcessing();
                 }
             }
         }
@@ -111,20 +111,29 @@ namespace TempoMeasurer
             IList<string> results = e.Results.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
             ProcessStrings(results);
             Console.WriteLine("Result received.");
-            BeginProcessing();
+     //       BeginProcessing();
         }
 
         private void Recognizer_PartialResults(object sender, PartialResultsEventArgs e)
         {
             IList<string> results = e.PartialResults.GetStringArrayList(SpeechRecognizer.ResultsRecognition);
-            ProcessStrings(results);
+            Console.WriteLine("Partial Result");
+     //       ProcessStrings(results);
         }
 
         private void ProcessStrings(IList<string> strings)
         {
+            if (strings.Count == 0 || (strings.Count == 1 && strings[0].Equals(""))) return;
             DateTime now = DateTime.UtcNow;
 
             double duration = now.Subtract(previousResultTimestamp).TotalSeconds;
+
+            string longest = "";
+            foreach (string s in strings)
+            {
+                if (s.Length > longest.Length) longest = s;
+            }
+            strings = new List<string>(longest.Split(' '));
 
             if (duration == 0) duration = .01;
 
@@ -132,10 +141,15 @@ namespace TempoMeasurer
             int wordlength = 0;
 
             int i = 0;
-            while (i < strings.Count && i < lastResult.Count && lastResult[i].Equals(strings[i]))
-            {
-                i++;
-            }
+            //while (i < strings.Count && i < lastResult.Count && lastResult[i].Equals(strings[i]))
+            //{
+            //    i++;
+            //}
+            //if (i < strings.Count && i < lastResult.Count)
+            //{
+            //    Console.WriteLine(lastResult[i] + " != " + strings[i]);
+            //}
+            
             result += i + " ";
             for (int j = i; j < strings.Count; j++)
             {
@@ -149,6 +163,8 @@ namespace TempoMeasurer
 
             double averageWordLength = wordlength / duration;
 
+            Console.WriteLine("Duration: " + duration + ", Letters: " + wordlength);
+
             averageWordLengthPerSecond = alpha * averageWordLength + (1 - alpha) * averageWordLengthPerSecond;
 
             _displayText.Text = averageWordLengthPerSecond + "";
@@ -156,10 +172,12 @@ namespace TempoMeasurer
             if (averageWordLengthPerSecond < slowThreshold)
             {
 
-            } else if (averageWordLengthPerSecond > fastThreshold)
+            }
+            else if (averageWordLengthPerSecond > fastThreshold)
             {
 
-            } else
+            }
+            else
             {
 
             }
