@@ -165,7 +165,15 @@ namespace PromptrLib.Connector
          */ 
         private async Task SendCommand(LightCommand command, List<string> deviceList )
         {
-            await client.SendCommandAsync(command, deviceList);
+            try
+            {
+                await client.SendCommandAsync(command, deviceList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         /*
@@ -174,7 +182,14 @@ namespace PromptrLib.Connector
          */ 
         private async Task SendCommand(LightCommand command)
         {
-            await client.SendCommandAsync(command);
+            try
+            {
+                await client.SendCommandAsync(command);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         
     }
