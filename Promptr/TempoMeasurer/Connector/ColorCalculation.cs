@@ -1,5 +1,4 @@
 ﻿using Java.Lang;
-using System.Drawing;
 
 namespace TempoMeasurer.Connector
 {

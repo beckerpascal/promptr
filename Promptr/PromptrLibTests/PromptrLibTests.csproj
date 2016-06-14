@@ -67,18 +67,25 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="ConnectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PromptrConnector\PromptrConnector.csproj">
+      <Project>{7dd47011-f01b-41cf-a6cd-8a35450fb2cf}</Project>
+      <Name>PromptrConnector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PromptrLib\PromptrLib.csproj">
       <Project>{c2a37c88-1fb9-4c47-8685-c1d269b87ee7}</Project>
       <Name>PromptrLib</Name>

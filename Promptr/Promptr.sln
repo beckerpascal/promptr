@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptrLib", "PromptrLib\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoMeasurer", "TempoMeasurer\TempoMeasurer.csproj", "{979C7DE0-6901-4AD7-B200-4D0E600B76AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptrConnector", "PromptrConnector\PromptrConnector.csproj", "{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CI|Any CPU = CI|Any CPU
@@ -135,6 +137,30 @@ Global
 		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|x86.Build.0 = Release|Any CPU
 		{979C7DE0-6901-4AD7-B200-4D0E600B76AE}.Release|x86.Deploy.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|Any CPU.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|ARM.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|ARM.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|x64.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|x64.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|x86.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.CI|x86.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|x64.Build.0 = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|ARM.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|x64.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|x64.Build.0 = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DD47011-F01B-41CF-A6CD-8A35450FB2CF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
