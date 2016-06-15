@@ -9,8 +9,8 @@ namespace PromptrLibTests
         [TestMethod]
         public void ColorCalculator()
         {
-            PromptrConnector.Connector.ColorCalculation colorCalculatorA 
-                = new PromptrConnector.Connector.ColorCalculation();
+            PromptrLib.Connector.ColorCalculation colorCalculatorA 
+                = new PromptrLib.Connector.ColorCalculation();
             var a = colorCalculatorA.CalculateColorFade(55, "#FFAA66", "#FF00FF");
         }
     }

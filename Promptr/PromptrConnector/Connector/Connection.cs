@@ -4,20 +4,18 @@ using System.Threading.Tasks;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 
-namespace TempoMeasurer.Connector
+namespace PromptrLib.Connector
 {
     /*
      * Class for the handling the calls between the Promptr library and the Hue hardware
-     */
-
+     */ 
     public class Connection
     {
         private ILocalHueClient client;
 
         /*
          * Constructor for a specific client
-         */
-
+         */ 
         public Connection(ILocalHueClient client)
         {
             this.client = client;
@@ -25,8 +23,7 @@ namespace TempoMeasurer.Connector
 
         /*
          * Turn on all bulbs
-         */
-
+         */ 
         public async Task TurnOn()
         {
             var command = new LightCommand();
@@ -38,8 +35,7 @@ namespace TempoMeasurer.Connector
         /*
          * Turn on all bulbs with a specific color
          * @param color: color in hex format
-         */
-
+         */ 
         public async Task TurnOn(string color)
         {
             var command = new LightCommand();
@@ -52,35 +48,32 @@ namespace TempoMeasurer.Connector
         /*
          * Turn on a specific bulb
          * @param id: specific bulb id
-         */
-
+         */ 
         public async Task TurnOn(int id)
         {
             var command = new LightCommand();
             command.TurnOn();
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
         }
 
         /*
          * Turn on a specific bulb with a specific color
          * @param color: color in hex format
          * @param id: id of the bulb
-         */
-
+         */ 
         public async Task TurnOn(string color, int id)
         {
             var command = new LightCommand();
             command.SetColor(color);
             command.TurnOn();
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
         }
 
         /*
          * Turns off all bulbs
-         */
-
+         */ 
         public async Task TurnOff()
         {
             var command = new LightCommand();
@@ -92,14 +85,13 @@ namespace TempoMeasurer.Connector
         /*
          * Turns off a specific bulb
          * @param id: id of bulb
-         */
-
+         */ 
         public async Task TurnOff(int id)
         {
             var command = new LightCommand();
             command.TurnOff();
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
         }
 
         /*
@@ -110,7 +102,6 @@ namespace TempoMeasurer.Connector
          * @param endColor: end color in hex format
          * @param id: id of specific bulb
          */
-
         public async Task Fade(int percent, string startColor, string endColor, int id)
         {
             ColorCalculation colorCalc = new ColorCalculation();
@@ -128,39 +119,36 @@ namespace TempoMeasurer.Connector
          * @param endColor: end color in hex format
          * @param id: id of specific bulb
          */
-
         public async Task Fade(TimeSpan timeSpan, string startColor, string endColor, int id)
         {
             var command = new LightCommand();
 
             command.SetColor(startColor);
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
 
             command = new LightCommand();
 
             command.SetColor(endColor);
             command.TransitionTime = timeSpan;
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
         }
 
         /*
          * Blink with a specific id
          */
-
         public async Task Blink(int id)
         {
             var command = new LightCommand();
             command.Alert = Alert.Once;
 
-            await SendCommand(command, new List<string> {id.ToString()});
+            await SendCommand(command, new List<string> { id.ToString() });
         }
 
         /*
          * Blink with all bulbs
          */
-
         public async Task Blink()
         {
             var command = new LightCommand();
@@ -173,9 +161,8 @@ namespace TempoMeasurer.Connector
          * Send a LightCommand for specific bulbs to the hardware
          * @param command: LightCommand
          * @param deviceList: String list with all ids that will receive the given command
-         */
-
-        private async Task SendCommand(LightCommand command, List<string> deviceList)
+         */ 
+        private async Task SendCommand(LightCommand command, List<string> deviceList )
         {
             try
             {
@@ -183,16 +170,14 @@ namespace TempoMeasurer.Connector
             }
             catch (Exception)
             {
-                
             }
-
+            
         }
 
         /*
          * Send a LightCommand for all bulbs
          * @param command: LightCommand
-         */
-
+         */ 
         private async Task SendCommand(LightCommand command)
         {
             try
@@ -201,8 +186,8 @@ namespace TempoMeasurer.Connector
             }
             catch (Exception)
             {
-                
             }
         }
+        
     }
 }

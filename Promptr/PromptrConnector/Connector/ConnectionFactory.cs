@@ -1,7 +1,11 @@
-﻿using Q42.HueApi;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Q42.HueApi;
 using Q42.HueApi.Interfaces;
+using Q42.HueApi.NET;
 
-namespace TempoMeasurer.Connector
+namespace PromptrLib.Connector
 {
     /*
      * Factory for creating connections with a specific Hue Bridge defined in the Constants class
@@ -25,6 +29,10 @@ namespace TempoMeasurer.Connector
          */ 
         public Connection GetConnection()
         {
+            //IBridgeLocator locator = new SSDPBridgeLocator();
+            //IEnumerable<string> bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(20));
+
+
             ILocalHueClient client = new LocalHueClient(Constants.BRIDGE_IP);
             client.Initialize(_appKey);
 

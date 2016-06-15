@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -73,11 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioThread.cs" />
-    <Compile Include="Connector\ColorCalculation.cs" />
-    <Compile Include="Connector\Connection.cs" />
-    <Compile Include="Connector\ConnectionFactory.cs" />
-    <Compile Include="Connector\ConnectorClient.cs" />
-    <Compile Include="Connector\IConnectorClient.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -115,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PromptrConnector\PromptrLib.csproj">
+      <Project>{7dd47011-f01b-41cf-a6cd-8a35450fb2cf}</Project>
+      <Name>PromptrLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

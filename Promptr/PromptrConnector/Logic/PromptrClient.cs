@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Timers;
-using PromptrLib.Connector;
+using System.Threading;
 using System.Threading.Tasks;
+using PromptrLib.Connector;
 
 namespace PromptrLib.Logic
 {
@@ -14,13 +14,13 @@ namespace PromptrLib.Logic
         private TimeSpan _totalDuration;
         private TimeSpan[] _slideDurations;
         private Timer _timer;
-        private Timer _slideTimer;
-        private Timer _blinkTimer;
+        //private Timer _slideTimer;
+        //private Timer _blinkTimer;
 
         // Private members for handling bulbs and slides
         private int _percent;
         private int _currentBulb;
-        private int _currentSlide;
+        //private int _currentSlide;
         private Timer endTimer;
 
         /*
@@ -29,7 +29,6 @@ namespace PromptrLib.Logic
         public PromptrClient()
         {
             _connection = new ConnectorClient();
-            _timer = new Timer();
             _currentBulb = 0;
         }
 
@@ -39,7 +38,7 @@ namespace PromptrLib.Logic
         public void EndCountdown()
         {
             _connection.TurnOff();
-            endTimer.Stop();
+            endTimer.Dispose();
         }
 
         /*
@@ -75,57 +74,51 @@ namespace PromptrLib.Logic
 
             _connection.TurnOn(Constants.COLOR_LIME);
 
-            _timer = new Timer(_totalDuration.TotalMilliseconds / (Constants.AMOUNT_OF_BULBS * 100));
-            _timer.AutoReset = true;
-            _timer.Elapsed += (sender, args) =>
-            {
-                _percent++;
-                FadeCurrentLight();
-                if (_percent == 100)
-                {
-                    _percent = 0;
-                    _currentBulb++;
-                }
-
-
-                if (_currentBulb > Constants.AMOUNT_OF_BULBS)
-                {
-                    _timer.Stop();
-                    _connection.TurnOff();
-                }
-            };
-
-
             InitiateFade();
 
-            _timer.Start();
+            _timer = new Timer(Callback, null, 0, Convert.ToInt32(totalDuration.TotalMilliseconds / (Constants.AMOUNT_OF_BULBS * 100))); 
 
-            endTimer = new System.Timers.Timer(_totalDuration.TotalMilliseconds * 5 / 6);
-            endTimer.AutoReset = false;
-            endTimer.Elapsed += (sender, args) =>
+            endTimer = new Timer(BlinkCallback, null, Convert.ToInt32(_totalDuration.TotalMilliseconds * 5 / 6), Timeout.Infinite);
+
+        }
+
+        private async void BlinkCallback(object state)
+        {
+            _connection.Blink();
+
+            await Task.Delay(1000);
+
+            _connection.Blink();
+
+            await Task.Delay(1000);
+
+            _connection.Blink();
+
+            await Task.Delay(1000);
+
+            _connection.Blink();
+
+            await Task.Delay(1000);
+
+            _connection.Blink();
+        }
+
+        private void Callback(Object state)
+        {
+            _percent++;
+            FadeCurrentLight();
+            if (_percent == 100)
             {
-                _connection.Blink();
-
-                System.Threading.Thread.Sleep(1000);
-
-                _connection.Blink();
-
-                System.Threading.Thread.Sleep(1000);
-
-                _connection.Blink();
-
-                System.Threading.Thread.Sleep(1000);
-
-                _connection.Blink();
-
-                System.Threading.Thread.Sleep(1000);
-
-                _connection.Blink();
+                _percent = 0;
+                _currentBulb++;
+            }
 
 
-            };
-            endTimer.Start();
-
+            if (_currentBulb > Constants.AMOUNT_OF_BULBS)
+            {
+                _timer.Dispose();
+                _connection.TurnOff();
+            }
         }
 
         private async void InitiateFade()
@@ -145,6 +138,7 @@ namespace PromptrLib.Logic
 
         public void SetSpeechTempo(int tempoLevel)
         {
+            /*
             if (tempoLevel < 0)
             {
                 _blinkTimer = InitializeBlinkTimer(1500);
@@ -157,8 +151,9 @@ namespace PromptrLib.Logic
             }
             else
             {
-                if (_blinkTimer != null) _blinkTimer.Stop();
+                if (_blinkTimer != null) _blinkTimer.Dispose();
             }
+            
         }
 
         private Timer InitializeBlinkTimer(int interval)
@@ -170,7 +165,8 @@ namespace PromptrLib.Logic
                 _connection.Blink(_currentBulb);
             };
 
-            return timer;
+            return timer;*/
         }
+
     }
 }

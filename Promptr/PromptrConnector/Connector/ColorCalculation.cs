@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PromptrConnector.Connector
+namespace PromptrLib.Connector
 {
     /*
      * Class for processing calculations with colors

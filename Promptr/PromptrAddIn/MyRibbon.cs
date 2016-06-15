@@ -14,7 +14,7 @@ namespace PromptrAddIn
 
         private List<int> overwritten;
 
-        private int currentSlideIndex;
+        //private int currentSlideIndex;
 
         private void MyRibbon_Load(object sender, RibbonUIEventArgs e)
         {

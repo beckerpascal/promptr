@@ -10,7 +10,8 @@ using Android.Content.PM;
 using Android.Support.V4.App;
 using Android.Speech;
 using System.Collections.Generic;
-using TempoMeasurer.Connector;
+using PromptrLib.Connector;
+using PromptrLib.Logic;
 using System.Timers;
 using Java.Lang;
 
@@ -141,7 +142,7 @@ namespace TempoMeasurer
             view.Animate().ScaleX(1f).ScaleY(1f).Rotation(0).SetDuration(500).Start();
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        public void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             if (requestCode == 312)
             {
